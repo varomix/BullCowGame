@@ -3,23 +3,42 @@
 
 using namespace std;
 
-int main()
-{
-	// introduce the game
-	constexpr int WORD_LENGTH = 5;
-	cout << "Welcome to Bulls and Cows, a fun word game." << endl;
-	cout << "Can you guess the " << WORD_LENGTH;
-	cout << " letter word I'm thinking of?\n\n";
+void PrintIntro();
+string GetGuess();
 
-	// get a guess from the player
-	string Guess = "";
-	cout << "Enter your guess: ";
-	cin >> Guess;
+int main() {
 
-	cout << "your guess was: " << Guess << endl;
+  PrintIntro();
 
+  // loop for a number of guesses
+  constexpr int NUM_TURNS = 5;
+  for (int i = 0; i < NUM_TURNS; ++i) {
+    GetGuess();
+  }
 
+  cout << endl;
+  return 0;
+}
 
-	cout << endl;
-	return 0;
+void PrintIntro() {
+  // introduce the game
+  constexpr int WORD_LENGTH = 5;
+  cout << "Welcome to Bulls and Cows, a fun word game." << endl;
+  cout << "Can you guess the " << WORD_LENGTH;
+  cout << " letter word I'm thinking of?\n\n";
+  cout << endl;
+  return;
+}
+
+string GetGuess() {
+  // get a guess from the player
+  string Guess = "";
+  cout << "Enter your guess: ";
+
+  // get player input
+  getline(cin, Guess);
+
+  cout << "your guess was: " << Guess << endl<<endl;
+
+  return Guess;
 }
