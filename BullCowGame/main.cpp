@@ -10,7 +10,7 @@ int main()
 	cout << "Welcome to Bulls and Cows, a fun word game." << endl;
 	cout << "Can you guess the " << WORD_LENGTH;
 	cout << " letter word I'm thinking of?\n\n";
-	 
+
 	// get a guess from the player
 	string Guess = "";
 	cout << "Enter your guess: ";
