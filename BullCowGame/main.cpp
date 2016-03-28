@@ -1,17 +1,18 @@
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "fbullcowgame.h"
 
 void PrintIntro();
-string GetGuess();
+std::string GetGuess();
 void PlayGame();
 bool AskToPlayAgain();
+
+FBullCowGame BCGame;
 
 int main() {
 
   do {
-    cout << endl;
+    std::cout << std::endl;
     PrintIntro();
     PlayGame();
   } while (AskToPlayAgain() == 1);
@@ -22,36 +23,41 @@ int main() {
 void PrintIntro() {
   // introduce the game
   constexpr int WORD_LENGTH = 5;
-  cout << "Welcome to Bulls and Cows, a fun word game." << endl;
-  cout << "Can you guess the " << WORD_LENGTH;
-  cout << " letter word I'm thinking of?\n\n";
+  std::cout << "Welcome to Bulls and Cows, a fun word game." << std::endl;
+  std::cout << "Can you guess the " << WORD_LENGTH;
+  std::cout << " letter word I'm thinking of?\n\n";
   return;
 }
 
 void PlayGame() {
+  BCGame.Reset();
+  int MaxTries = BCGame.GetMaxTries();
+
   // loop for a number of guesses
-  constexpr int NUM_TURNS = 5;
-  for (int i = 0; i < NUM_TURNS; ++i) {
-    cout << "your guess was: " << GetGuess() << endl;
-    cout << endl;
+  for (int i = 0; i < MaxTries; ++i) {
+    std::cout << "your guess was: " << GetGuess() << std::endl; // TODO make loop checking validity
+    std::cout << std::endl;
   }
+
+  // TODO sumarize game
 }
 
-string GetGuess() {
+std::string GetGuess() {
+  int CurrentTry = BCGame.GetCurrentTry();
   // get a guess from the player
-  string Guess = "";
-  cout << "Enter your guess: ";
+  std::string Guess = "";
+  std::cout << "Try " << CurrentTry << ". Enter your guess: ";
 
   // get player input
-  getline(cin, Guess);
+  getline(std::cin, Guess);
 
   return Guess;
 }
 
 bool AskToPlayAgain() {
-  cout << "Do you want to play again?: ";
-  string Response = "";
-  getline(cin, Response);
+  std::cout << "Do you want to play again?: ";
+  std::string Response = "";
+  getline(std::cin, Response);
 
   return (Response[0] == 'y' || Response[0] == 'Y');
 }
